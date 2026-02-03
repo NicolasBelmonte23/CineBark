@@ -1,4 +1,13 @@
 package com.dev.CineBark.core.usecases;
 
-public class CreateMovieCaseImpl {
+import com.dev.CineBark.core.domain.Movies;
+
+public class CreateMovieCaseImpl implements CreatMovieCase {
+
+
+
+    @Override
+    public Movies execute(Movies movie) {
+        return movie;
+    }
 }
