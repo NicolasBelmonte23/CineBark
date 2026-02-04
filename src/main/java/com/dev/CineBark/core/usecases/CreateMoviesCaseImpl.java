@@ -2,7 +2,7 @@ package com.dev.CineBark.core.usecases;
 
 import com.dev.CineBark.core.domain.Movies;
 
-public class CreateMovieCaseImpl implements CreatMovieCase {
+public class CreateMoviesCaseImpl implements CreatMoviesCase {
 
 
 
