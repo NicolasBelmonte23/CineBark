@@ -1,17 +1,33 @@
 package com.dev.CineBark.infra.persistence;
 
+import com.dev.CineBark.core.domain.Users;
 import com.dev.CineBark.core.enums.Ticket;
-
+import jakarta.persistence.*;
+import lombok.*;
 import java.time.LocalDateTime;
 
-public record Movies(String title,
-                     String ticket,
-                     Ticket typeTicket,
-                     int room,
-                     String description,
-                     String category,
-                     double rating,
-                     int capacity,
-                     LocalDateTime beginningMovie,
-                     LocalDateTime endMovie) {
+@NoArgsConstructor
+@AllArgsConstructor
+@Data
+@Entity
+@Table(name = "movies")
+public class MoviesEntity{
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    private String title;
+    private String ticket;
+    @Enumerated(EnumType.STRING)
+    private Ticket typeTicket;
+    private int room;
+    private String description;
+    private String category;
+    private double rating;
+    private int capacity;
+    private LocalDateTime beginningMovie;
+    private LocalDateTime endMovie;
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private UsersEntity user;
+
 }

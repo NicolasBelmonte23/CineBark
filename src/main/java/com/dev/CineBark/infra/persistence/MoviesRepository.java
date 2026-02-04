@@ -1,4 +1,6 @@
 package com.dev.CineBark.infra.persistence;
 
-public interface MoviesRepository {
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface MoviesRepository extends JpaRepository<MoviesEntity, Long> {
 }
