@@ -9,4 +9,6 @@ public interface UsersGateway {
     Users createUsers(Users user);
 
     List<Users> findUsers();
+
+    Boolean existId(Long id);
 }

@@ -6,8 +6,6 @@ import com.dev.CineBark.infra.mappers.MovieEntityMapper;
 import com.dev.CineBark.infra.persistence.MoviesEntity;
 import com.dev.CineBark.infra.persistence.MoviesRepository;
 import org.springframework.stereotype.Component;
-
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -30,10 +28,18 @@ public class MoviesRepositoryGateway implements MoviesGateway {
         return mapper.toDomain(movie);
     }
 
+
     @Override
     public List<Movies> findMovies() {
         return movieRepository.findAll().stream()
                 .map(mapper :: toDomain)
                 .collect(Collectors.toList());
         }
+
+    @Override
+    public Boolean existId(String ident) {
+        return movieRepository.findAll()
+                .stream()
+                .anyMatch(movie ->movie.getTicket().equalsIgnoreCase(ident));
     }
+}

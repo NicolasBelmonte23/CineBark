@@ -9,4 +9,7 @@ public interface MoviesGateway {
     Movies createMovie(Movies movies);
 
     List<Movies> findMovies();
+
+    Boolean existId(String ident);
+
 }

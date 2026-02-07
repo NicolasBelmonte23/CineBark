@@ -15,6 +15,6 @@ public class FindUsersCaseImpl implements FindUsersCase {
 
     @Override
     public List<Users> execute() {
-        return usersGateway.findUsers();
+        return List.of();
     }
 }

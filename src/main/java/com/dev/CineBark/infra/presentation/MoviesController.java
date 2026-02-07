@@ -5,9 +5,12 @@ import com.dev.CineBark.core.usecases.CreateMoviesCase;
 import com.dev.CineBark.core.usecases.FindMovieCase;
 import com.dev.CineBark.infra.dtos.MoviesDto;
 import com.dev.CineBark.infra.mappers.MoviesMapper;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @RestController
@@ -25,9 +28,13 @@ public class MoviesController {
     }
 
     @PostMapping("createmovie")
-    public MoviesDto createMovie(@RequestBody MoviesDto moviesDTO){
+    public ResponseEntity<Map<String,Object>>createMovie(@RequestBody MoviesDto moviesDTO){
         Movies movies = createMoviesCase.execute(moviesMapper.toDomain(moviesDTO));
-        return moviesMapper.toDTO(movies);
+        Map<String,Object> response = new HashMap<>();
+        response.put("message: ","Filme criado com sucesso!");
+        response.put("Data ",moviesMapper.toDTO(movies));
+        return ResponseEntity.ok(response);
+
     }
 
     @GetMapping("findmovie")

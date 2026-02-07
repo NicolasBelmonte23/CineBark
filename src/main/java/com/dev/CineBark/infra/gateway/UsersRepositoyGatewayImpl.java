@@ -32,5 +32,12 @@ public class UsersRepositoyGatewayImpl implements UsersGateway {
     public List<Users> findUsers() {
         return usersRepository.findAll().stream().map(mapper::toDomain).collect(Collectors.toList());}
 
+    @Override
+    public Boolean existId(Long id) {
+        return usersRepository.findAll()
+                .stream()
+                .anyMatch(user->user.getId().equals(id));
+    }
+
 
 }
