@@ -1,7 +1,10 @@
 package com.dev.CineBark.infra.dtos;
 
+
 import com.dev.CineBark.core.domain.Users;
 import com.dev.CineBark.core.enums.Ticket;
+
+
 import java.time.LocalDateTime;
 
 public record MoviesDto(Long id,
@@ -15,5 +18,5 @@ public record MoviesDto(Long id,
                         int capacity,
                         LocalDateTime beginningMovie,
                         LocalDateTime endMovie,
-                        Users users)
+                        Long userId)
 {}

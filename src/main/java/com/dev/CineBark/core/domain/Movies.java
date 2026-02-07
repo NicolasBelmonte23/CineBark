@@ -3,7 +3,6 @@ package com.dev.CineBark.core.domain;
 import com.dev.CineBark.core.enums.Ticket;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 public record Movies(Long id,
                      String title,
@@ -16,5 +15,5 @@ public record Movies(Long id,
                      int capacity,
                      LocalDateTime beginningMovie,
                      LocalDateTime endMovie,
-                     Users users) {
+                     Long userId) {
 }

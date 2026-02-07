@@ -7,38 +7,37 @@ import org.springframework.stereotype.Component;
 @Component
 public class MoviesMapper {
 
-    public MoviesDto map(Movies movie) {
+    public MoviesDto toDTO(Movies movie) {
         return new MoviesDto(
-        movie.id(),
-        movie.title(),
-        movie.ticket(),
-        movie.typeTicket(),
-        movie.room(),
-        movie.description(),
-        movie.category(),
-        movie.rating(),
-        movie.capacity(),
-        movie.beginningMovie(),
-        movie.endMovie(),
-        movie.users()
+                movie.id(),
+                movie.title(),
+                movie.ticket(),
+                movie.typeTicket(),
+                movie.room(),
+                movie.description(),
+                movie.category(),
+                movie.rating(),
+                movie.capacity(),
+                movie.beginningMovie(),
+                movie.endMovie(),
+                movie.userId()
         );
     }
 
-    public Movies map(MoviesDto moviesDto) {
+    public Movies toDomain(MoviesDto dto) {
         return new Movies(
-                moviesDto.id(),
-                moviesDto.title(),
-                moviesDto.ticket(),
-                moviesDto.typeTicket(),
-                moviesDto.room(),
-                moviesDto.description(),
-                moviesDto.category(),
-                moviesDto.rating(),
-                moviesDto.capacity(),
-                moviesDto.beginningMovie(),
-                moviesDto.endMovie(),
-                moviesDto.users()
+                dto.id(),
+                dto.title(),
+                dto.ticket(),
+                dto.typeTicket(),
+                dto.room(),
+                dto.description(),
+                dto.category(),
+                dto.rating(),
+                dto.capacity(),
+                dto.beginningMovie(),
+                dto.endMovie(),
+                dto.userId()
         );
-
     }
 }

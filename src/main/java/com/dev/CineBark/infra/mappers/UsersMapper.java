@@ -4,29 +4,28 @@ import com.dev.CineBark.core.domain.Users;
 import com.dev.CineBark.infra.dtos.UsersDto;
 import org.springframework.stereotype.Component;
 
+
 @Component
 public class UsersMapper {
 
-    public Users map(UsersDto usersDTO){
+    public Users toDomain(UsersDto usersDTO){
         return new Users(
                 usersDTO.id(),
                 usersDTO.name(),
                 usersDTO.email(),
                 usersDTO.password(),
-                usersDTO.cpf(),
-                usersDTO.movies()
+                usersDTO.cpf()
         );
 
     }
 
-    public UsersDto map(Users users){
+    public UsersDto toDto(Users users){
         return new UsersDto(
                 users.id(),
                 users.name(),
                 users.email(),
                 users.password(),
-                users.cpf(),
-                users.movies()
+                users.cpf()
         );
     }
 }
