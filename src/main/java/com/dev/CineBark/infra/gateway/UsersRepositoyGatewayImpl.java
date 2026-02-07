@@ -34,9 +34,7 @@ public class UsersRepositoyGatewayImpl implements UsersGateway {
 
     @Override
     public Boolean existId(Long id) {
-        return usersRepository.findAll()
-                .stream()
-                .anyMatch(user->user.getId().equals(id));
+        return usersRepository.existsById(id);
     }
 
 

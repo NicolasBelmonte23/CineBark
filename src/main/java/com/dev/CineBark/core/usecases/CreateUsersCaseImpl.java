@@ -17,6 +17,6 @@ public class CreateUsersCaseImpl implements CreateUserCase{
         if(usersGateway.existId(users.id())){
             throw new DuplicateUserException("Já existe o id: " + users.id() + " no nosso sistema");
         }
-        return users;
+        return usersGateway.createUsers(users);
     }
 }
