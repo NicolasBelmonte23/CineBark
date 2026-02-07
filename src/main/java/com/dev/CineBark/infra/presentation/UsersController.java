@@ -2,12 +2,15 @@ package com.dev.CineBark.infra.presentation;
 
 import com.dev.CineBark.core.domain.Users;
 import com.dev.CineBark.core.usecases.CreateUserCase;
+import com.dev.CineBark.core.usecases.FilterUsersCase;
 import com.dev.CineBark.core.usecases.FindUsersCase;
 import com.dev.CineBark.infra.dtos.UsersDto;
 import com.dev.CineBark.infra.mappers.UsersMapper;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RestController
@@ -16,11 +19,13 @@ public class UsersController {
     private final CreateUserCase createUsersCase;
     private final UsersMapper usersMapper;
     private final FindUsersCase findUsersCase;
+    private final FilterUsersCase filterUsersCase;
 
-    public UsersController(CreateUserCase createUsersCase, UsersMapper usersMapper, FindUsersCase findUsersCase) {
+    public UsersController(CreateUserCase createUsersCase, UsersMapper usersMapper, FindUsersCase findUsersCase, FilterUsersCase filterUsersCase) {
         this.createUsersCase = createUsersCase;
         this.usersMapper = usersMapper;
         this.findUsersCase = findUsersCase;
+        this.filterUsersCase = filterUsersCase;
     }
 
     @PostMapping("createusers")
@@ -35,5 +40,11 @@ public class UsersController {
                 .stream()
                 .map(usersMapper::toDto)
                 .collect(Collectors.toList());
+    }
+
+    @GetMapping("id/{id}")
+    public ResponseEntity<Users> filterUsers(@PathVariable Long id){
+      Users user = filterUsersCase.execute(id);
+      return ResponseEntity.ok(user);
     }
 }

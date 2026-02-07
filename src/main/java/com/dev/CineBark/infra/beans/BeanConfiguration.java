@@ -29,4 +29,14 @@ public class BeanConfiguration {
     public FindUsersCase findUsersCase(UsersGateway usersGateway){
         return new FindUsersCaseImpl(usersGateway);
     }
+
+    @Bean
+    public FilterUsersCase filterUsersCase(UsersGateway usersGateway){
+        return new FilterUsersCaseImpl(usersGateway);
+    }
+
+    @Bean
+    public FilterMoviesCase filterMoviesCase(MoviesGateway moviesGateway){
+        return new FilterMoviesCaseImpl(moviesGateway);
+    }
 }

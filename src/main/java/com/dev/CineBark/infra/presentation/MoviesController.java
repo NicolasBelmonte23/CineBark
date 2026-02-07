@@ -2,6 +2,7 @@ package com.dev.CineBark.infra.presentation;
 
 import com.dev.CineBark.core.domain.Movies;
 import com.dev.CineBark.core.usecases.CreateMoviesCase;
+import com.dev.CineBark.core.usecases.FilterMoviesCase;
 import com.dev.CineBark.core.usecases.FindMovieCase;
 import com.dev.CineBark.infra.dtos.MoviesDto;
 import com.dev.CineBark.infra.mappers.MoviesMapper;
@@ -20,11 +21,13 @@ public class MoviesController {
     private final CreateMoviesCase createMoviesCase;
     private final MoviesMapper moviesMapper;
     private final FindMovieCase findMovieCase;
+    private final FilterMoviesCase filterMoviesCase;
 
-    public MoviesController(CreateMoviesCase createMoviesCase, MoviesMapper moviesMapper,FindMovieCase findMovieCase) {
+    public MoviesController(CreateMoviesCase createMoviesCase, MoviesMapper moviesMapper,FindMovieCase findMovieCase, FilterMoviesCase filterMoviesCase) {
         this.createMoviesCase = createMoviesCase;
         this.moviesMapper = moviesMapper;
         this.findMovieCase = findMovieCase;
+        this.filterMoviesCase = filterMoviesCase;
     }
 
     @PostMapping("createmovie")
@@ -43,5 +46,11 @@ public class MoviesController {
                 .stream()
                 .map(moviesMapper::toDTO)
                 .collect(Collectors.toList());
+    }
+
+    @GetMapping("id/{id}")
+    public ResponseEntity<Movies> findMovie(@PathVariable String id){
+        Movies movie = filterMoviesCase.execute(id);
+        return ResponseEntity.ok(movie);
     }
 }

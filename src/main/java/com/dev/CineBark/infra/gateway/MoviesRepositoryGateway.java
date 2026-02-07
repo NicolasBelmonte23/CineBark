@@ -7,6 +7,7 @@ import com.dev.CineBark.infra.persistence.MoviesEntity;
 import com.dev.CineBark.infra.persistence.MoviesRepository;
 import org.springframework.stereotype.Component;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Component
@@ -41,5 +42,10 @@ public class MoviesRepositoryGateway implements MoviesGateway {
         return movieRepository.findAll()
                 .stream()
                 .anyMatch(movie ->movie.getTicket().equalsIgnoreCase(ident));
+    }
+
+    @Override
+    public Optional<Movies> filterMovies(String id) {
+        return movieRepository.findBytypeTicket(id);
     }
 }
