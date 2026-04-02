@@ -26,22 +26,22 @@ A estrutura de dependências aponta sempre de fora para dentro, ou seja, as cama
 
 ```mermaid
 graph TD
-    subgraph Camadas Externas (Frameworks & Drivers)
+    subgraph External [Camadas Externas e Frameworks]
         UI[Controllers / Web]
         DB[Database / Infra Repositories]
         Ext[APIs Externas]
     end
 
-    subgraph Adaptadores de Interface
+    subgraph Adapters [Adaptadores de Interface]
         Gateways[Gateways / Presenters / DTOs]
     end
 
-    subgraph Casos de Uso (Application)
+    subgraph Application [Casos de Uso]
         UC[Use Cases / Interactors]
     end
 
-    subgraph Entidades (Domain)
-        Ent[Entidades de Domínio / Regras Corporativas]
+    subgraph Domain [Entidades de Dominio]
+        Ent[Regras Corporativas]
     end
 
     UI --> Gateways
@@ -67,16 +67,16 @@ Quando uma requisição chega à API, o fluxo de comunicação entre as camadas 
 
 ```mermaid
 sequenceDiagram
-    participant Cliente as Cliente (Postman/Front)
+    participant Cliente as Cliente (Front-end)
     participant Controller as Controller (Infra Web)
     participant UseCase as UseCase (Application)
-    participant Interface as Interface Repository (Application)
+    participant Interface as Interface Repository
     participant InfraRepo as Repository Impl (Infra Data)
     participant DB as PostgreSQL
 
     Cliente->>Controller: POST /api/eventos
-    Controller->>UseCase: Chama o Caso de Uso enviando dados (Input)
-    UseCase->>Interface: Executa a regra de negócio e solicita salvar a Entidade
+    Controller->>UseCase: Chama o Caso de Uso enviando dados
+    UseCase->>Interface: Executa a regra e solicita salvar a Entidade
     Interface->>InfraRepo: A implementação concreta do repositório é acionada
     InfraRepo->>DB: INSERT INTO eventos
     DB-->>InfraRepo: Sucesso
